@@ -94,7 +94,8 @@
   span {color:#174ECA; }
   
   img {width: 100%;
-  border-radius: 25px;}
+  border-radius: 25px;
+overflow: hidden;}
   .card {margin-bottom: 48px;}
   
   footer {margin-top: 32px;}
