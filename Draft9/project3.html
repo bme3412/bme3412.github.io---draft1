@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html>  
+  <head>
+    <title>Brendan - Project 2</title>
+    <meta charset="utf-8">
+    <meta name="keywords" content>
+    <meta name="author" content="Brendan Erhard">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--IE-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
+    <!--[if IE]>
+      <style>
+        <link rel="stylesheet" type="text/css" href="css/ie9.css"/>
+      </style>
+    <![endif]-->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118173659-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-118173659-1');
+    </script>
+    <!--favi-->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="theme-color" content="#ffffff">
+    <!--font awesome-->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+    <!--jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--my CSS-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/main.css" type="text/css">
+    <link rel="stylesheet" href="css/ie10.css" type="text/css"> 
+    
+  </head>
+  
+  <body>
+   <div class="container">
+    <nav>
+      <a href="/html/index.html" id="branding">Brendan</a>
+      <a href="/html/about.html" >About</a>
+      <a href="/html/mystory.html">My Story</a> 
+      <a href="/html/work.html">Work</a> 
+      <a href="/html/fun.html">When Not Working</a>  
+    </nav>
+    <h2>Objective/Summary: Find the best games in the NBA since 2000</h2>
+    <p>Figure out ranking of top players by year - need to figure out a methodology for this - quintile the data? What were the best games to watch  -sum game_score by date. Figure out the top 25 playres to add to the list of top 75 players. Triple double work.
+    </p>
+    <h3>But first - how did I get all the data?</h3>
+    <p>web scraping from basketball reference</p>
+    <p>To rank players by year - need to get each individual game, and quantile all values that matter. Then find a moving average within each season, and then take an average-weight to quantile (histogram) for each season. Then do this for the entire time period, years 2000-2021. </p>
+    <h2>How Many Triples Doubles have been recorded since 2000?</h2>
+    <p>A 'triple double' in basketball is a statistical occurrence during which a player records >=10 in any three of the offensive statistical measures during a single game. As an example, the most common form of a triple-double is when an individual player tallies 10 or more points, 10 or more rebounds, and 10 or more assists for one game (the name refers to three stat categories in double digits). Some pundits regard it as a sign of basketball excellence, while others regard it as merely an outcome of stat-padding; the true meaning is likely somewhere in between. Triple-doubles historically have been rare, but have increased in prominence with the increased popularity of the three-point shot and increased pace of the game (higher ending game scores are indicative of more offensive possessions). </p>
+    <p>Since 2000, there has been a total of 1,090 triple-doubles tallied by NBA players. This includes 1,076 triple-doubles of the point-rebounds-assists variety, with 13 composed of point-rebounds-blocks, and 1 including rebounds, assists and steals. </p>
+    <figure>
+      <img src="/img/trip_dub_pra.png" srcset=""alt="trip-dub-pra">
+      <figcaption>Russell Westbrook is the clear leader among the top 25 players that posted triples-doubles since 2000</figcaption>
+    </figure>
+    <figure>
+      <img src="/img/trip_dub_prb.png" srcset=""alt="trip-dub-prb">
+      <figcaption>13 Point-Rebound-Block triple-doubles since 2000</figcaption>
+    </figure>
+    <p>Possible the most unique stat-line in NBA history (or at least since 2000): on February 10, 2017, Draymond Green of the Golden State Warriors recorded the first triple-double in NBA history without scroing double-digits in points. </p>
+    <figure>
+      <img src="/img/draymond.png" srcset=""alt="draymond">
+      <figcaption>The first triple-double in NBA history that did not incldue 10 or more points scored</figcaption>
+    </figure>
+    
+   
+   
+    <footer>
+      <hr/>
+      <div class="contact">
+        <a href="https://www.linkedin.com/in/brendan-erhard/" target="_blank">
+          <i title="linkedin" class="fab fa-linkedin-in fa-lg social"></i>
+        </a>
+        <a href="mailto:erhardbr@gmail.com" target="_top">
+          <i title="email" class="far fa-envelope fa-lg social"></i>
+        </a>
+        <a href="https://twitter.com/bme3414" target="_top">
+          <i title="twitter" class="fab fa-twitter fa-lg social"></i>
+        </a>
+        <a href="https://github.com/bme3412" target="_blank">
+          <i title="github" class="fab fa-github fa-lg social"></i>
+        </a>
+      </div>
+      <p>Made by BME, ©2021</p>
+    </footer>
+    
+   </div>
+   
+    <script src="/js/script.js"></script>
+  </body>
+  
+</html>
