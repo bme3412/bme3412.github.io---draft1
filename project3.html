@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html>  
+  <head>
+    <title>Brendan - Project 2</title>
+    <meta charset="utf-8">
+    <meta name="keywords" content>
+    <meta name="author" content="Brendan Erhard">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--IE-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9">
+    <!--[if IE]>
+      <style>
+        <link rel="stylesheet" type="text/css" href="css/ie9.css"/>
+      </style>
+    <![endif]-->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118173659-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-118173659-1');
+    </script>
+    <!--favi-->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="theme-color" content="#ffffff">
+    <!--font awesome-->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+    <!--jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--my CSS-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/main.css" type="text/css">
+    <link rel="stylesheet" href="css/ie10.css" type="text/css"> 
+    
+  </head>
+  
+  <body>
+   <div class="container">
+    <nav>
+      <a href="/html/index.html" id="branding">Brendan</a>
+      <a href="/html/about.html" >About</a>
+      <a href="/html/mystory.html">My Story</a> 
+      <a href="/html/work.html">Work</a> 
+      <a href="/html/fun.html">When Not Working</a>  
+    </nav>
+    <h2>Objective/Summary: Find the best games in the NBA since 2000</h2>
+    <p>Figure out ranking of top players by year - need to figure out a methodology for this - quintile the data? What were the best games to watch  -sum game_score by date. Figure out the top 25 playres to add to the list of top 75 players. Triple double work.
+    </p>
+    <h3>Identify test parameters, a question, and have a hypothesis</h3>
+    <h3>But first - how did I get all the data?</h3>
+    <p>Much of my data collection relied on data from the  <span><a href="https://www.basketball-reference.com/" target="_blank"> excellent Basketball Reference website,</a></span>  which has compiled statistics for seemingly every NBA game and NBA player that has ever played (and even data on the defunct ABA league). Using a combo of web scraping and calling APIs, for each of the 30 franchises in the NBA, I created a Jupyter workbook that pulled in the game log (an individual player's stats during a game) of each player for each of the 82 games played since 2000. With 12 players per team, 82 games played per year, 30 teams and 20 seasons, this implies a total dataset of ~590,400 records (12*82*30*20), although there is likely statistical noise involved.</p>
+    <p>With the API, I used a while loop that pulled in gamelogs for each player for every game of each season since 2000. I organized the data processing with NBA season as the iterator, and saved each gamelog to a dataframe specific for a given season and given team. I then saved the output into csv format for easier data engineering and analysis. I organized my file struture top consist of 30 folders for 30 teams, each containing 21 csv files with dataframes of each palyer's gamelog for every game of a certain season.</p>
+    <figure>
+      <img src="/img/nba_folders.png" srcset=""alt="nba-folders">
+      <figcaption>File structure for organizing data for each team</figcaption>
+    </figure>
+    <figure>
+      <img src="/img/bos_csvs.png" srcset=""alt="bos-csv">
+      <figcaption>Each team folder holds 21 CSV files holding dataframes of each playe's gamelog</figcaption>
+    </figure>
+    <p>Then for each team, I compiled all dataframes into one master dataframe with all game logs for every player since the 2000 season. I then ranked by highest GAME_SCORE to rank the best individual games fo each NBA team since 2000. </p>
+    <figure>
+      <img src="/img/BOS_df.png" srcset=""alt="bos-df">
+      <figcaption>Jayson Tatum's 60 point game ranks as the best individual game for the Boston Celtics since the 2000 season</figcaption>
+    </figure>
+    <p>I then appended all team dataframes to compile a master dataframe for each game log fo each palyer on each team for each since since 2000. I also ranked this by GAME_SCORE. </p>
+    <figure>
+      <img src="/img/NBA_df.png" srcset=""alt="nba-df">
+      <figcaption>Kobe Bryant tallied the best indivudal game of the past 20 years with his scintilatting 81 point outburst against Toronto in 2006</figcaption>
+    </figure>
+    <p>To rank players by year - need to get each individual game, and quantile all values that matter. Then find a moving average within each season, and then take an average-weight to quantile (histogram) for each season. Then do this for the entire time period, years 2000-2021. </p>
+    <h2>How Many Triples Doubles have been recorded since 2000?</h2>
+    <p>A 'triple double' in basketball is a statistical occurrence during which a player records >=10 in any three of the offensive statistical measures during a single game. As an example, the most common form of a triple-double is when an individual player tallies 10 or more points, 10 or more rebounds, and 10 or more assists for one game (the name refers to three stat categories in double digits). Some pundits regard it as a sign of basketball excellence, while others regard it as merely an outcome of stat-padding; the true meaning is likely somewhere in between. Triple-doubles historically have been rare, but have increased in prominence with the increased popularity of the three-point shot and increased pace of the game (higher ending game scores are indicative of more offensive possessions). </p>
+    <p>Since 2000, there has been a total of 1,090 triple-doubles tallied by NBA players. This includes 1,076 triple-doubles of the point-rebounds-assists variety, with 13 composed of point-rebounds-blocks, and 1 including rebounds, assists and steals. </p>
+    <figure>
+      <img src="/img/trip_dub_pra.png" srcset=""alt="trip-dub-pra">
+      <figcaption>Russell Westbrook is the clear leader among the top 25 players that posted triples-doubles since 2000</figcaption>
+    </figure>
+    <figure>
+      <img src="/img/trip_dub_prb.png" srcset=""alt="trip-dub-prb">
+      <figcaption>13 Point-Rebound-Block triple-doubles since 2000</figcaption>
+    </figure>
+    <p>Possible the most unique stat-line in NBA history (or at least since 2000): on February 10, 2017, Draymond Green of the Golden State Warriors recorded the first triple-double in NBA history without scroing double-digits in points. </p>
+    <figure>
+      <img src="/img/draymond.png" srcset=""alt="draymond">
+      <figcaption>The first triple-double in NBA history that did not incldue 10 or more points scored</figcaption>
+    </figure>
+    
+   
+   
+    <footer>
+      <hr/>
+      <div class="contact">
+        <a href="https://www.linkedin.com/in/brendan-erhard/" target="_blank">
+          <i title="linkedin" class="fab fa-linkedin-in fa-lg social"></i>
+        </a>
+        <a href="mailto:erhardbr@gmail.com" target="_top">
+          <i title="email" class="far fa-envelope fa-lg social"></i>
+        </a>
+        <a href="https://twitter.com/bme3414" target="_top">
+          <i title="twitter" class="fab fa-twitter fa-lg social"></i>
+        </a>
+        <a href="https://github.com/bme3412" target="_blank">
+          <i title="github" class="fab fa-github fa-lg social"></i>
+        </a>
+      </div>
+      <p>Made by BME, ©2021</p>
+    </footer>
+    
+   </div>
+   
+    <script src="/js/script.js"></script>
+  </body>
+  
+</html>
