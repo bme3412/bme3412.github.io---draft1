@@ -97,7 +97,16 @@
     <p>To rank players by year - need to get each individual game, and quantile all values that matter. Then find a moving average within each season, and then take an average-weight to quantile (histogram) for each season. Then do this for the entire time period, years 2000-2021. </p>
     <h3>Where to store the data for easy access? Enter SQL </h3>
     <p>Now that I have all the data for every game played by every NBA player since the 2000 season, I need a place to store the data. For this I rely upon SQL -- which I use with python for easier data manipulation..</p>
+    <figure>
+      <img src="/img/python_SQL.png" srcset=""alt="python-SQL">
+      <figcaption>API calling/web scraping --> python --> SQL. 230,236 data entries retrieved and processed in python, now in a MySQL table </figcaption>
+    </figure>
+    <figure>
+      <img src="/img/Kobe_SQL.png" srcset=""alt="kobe-SQL">
+      <figcaption>Box score data for every NBA player's every game played, since 2000 -- which allows for creative search queries</figcaption>
+    </figure>
     <h2>How Many Triples Doubles have been recorded since 2000?</h2>
+    <h3>Analysis using Python:</h3>
     <p>A 'triple double' in basketball is a statistical occurrence during which a player records >=10 in any three of the offensive statistical measures during a single game. As an example, the most common form of a triple-double is when an individual player tallies 10 or more points, 10 or more rebounds, and 10 or more assists for one game (the name refers to three stat categories in double digits). Some pundits regard it as a sign of basketball excellence, while others regard it as merely an outcome of stat-padding; the true meaning is likely somewhere in between. Triple-doubles historically have been rare, but have increased in prominence with the increased popularity of the three-point shot and increased pace of the game (higher ending game scores are indicative of more offensive possessions). </p>
     <p>Since 2000, there has been a total of 1,090 triple-doubles tallied by NBA players. This includes 1,076 triple-doubles of the point-rebounds-assists variety, with 13 composed of point-rebounds-blocks, and 1 including rebounds, assists and steals. </p>
     <figure>
@@ -113,7 +122,14 @@
       <img src="/img/draymond.png" srcset=""alt="draymond">
       <figcaption>The first triple-double in NBA history that did not include 10 or more points scored</figcaption>
     </figure>
+    <h3>Analysis using SQL:</h3> <br>
+    <br>
+    <figure>
+      <img src="/img/SQL_tripdoub.png" srcset=""alt="SQL_tripdub">
+      <figcaption>Using MySQL to identify triple-doubles </figcaption>
+    </figure>
     <h2>Once considered a majority-American sport, basketball is played in all parts of the world and the NBA is increasingly globally diverse</h2>
+  
     <p>The 1992 Olympics held in Barcelona, Spain marked the first time that American NBA players participated in the Olympics. And it showed, as the team, featuring Michael Jordan, Magic Johnson, Larry Bird and Charles Barkley, beat opponents by an average margin of 44 points on their way to taking home the gold medal. But the world has caught up since then, considerably, to the extent that the past 3 players awarded league MVP have been non-American.</p>
     <p>As shown below, international players represented ~23% of NBA rosters for the 2021 season (American players were 77%), which has been a steady mix shift since 2000, when 9 out of 10 players were American. In the 2021 season, American players hailed from 46 different countries, which is more than double the amount of countries represented in the 2000 season.</p>
     <figure>
