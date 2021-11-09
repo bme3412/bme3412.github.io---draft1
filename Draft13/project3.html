@@ -58,12 +58,16 @@
     <p>Before diving in you should know that much of the ranking analysis relies on using the Game Score metric, which is derived to standardize across all games, and provides a single measurement of a player's productivity for a single game. The metric is standardized such that a total of 40 points would be considered an outstanding performance, whereas 10 points is an average performance. *The formula for Game Score is: 'PTS + 0.4 * FG - 0.7 * FGA - 0.4*(FTA - FT) + 0.7 * ORB + 0.3 * DRB + STL + 0.7 * AST + 0.7 * BLK - 0.4 * PF - TOV'. </p>
     <figure>
       <img src="/img/Game_score_scatter.png" srcset=""alt="game-score-scatter">
-      <figcaption>Player game scores for all games played since 2000 n=230,326 </figcaption>
+      <figcaption>Player game scores for all games played since 2000 (n=230,326); the increased importance of the 3 point shot, as indicated by red, is apparent in what can only be reffered to as the "Steph Curry effect" </figcaption>
     </figure>
     <h4>See below for scorching hot takes: </h4>
     <ol>
       <li>The best player over the time period spanning from 2000-2021, purely looking at statistics and excluding the postseason, was LeBron James, followed next by Kevin Durant and then James Harden.</li>
-      <li>The best individual game during the past 20 years came from Kobe Bryant (Rest in Peace) in the 2006 season, when he scored 81 points, the 2nd highest in league history, to beat the Toronto Raptors. </li>
+      <li>The best individual game during the past 20 years came from Kobe Bryant (Rest in Peace) in the 2006 season, when he scored 81 points, the 2nd highest in league history, to beat the Toronto Raptors. The next best game was a 60 point triple-double by James Harden, followed by a 70 point game by Devin Booker (the 3rd most points in a single game of all time). </li>
+      <figure>
+        <img src="/img/top_5.png" srcset=""alt="top-5-games">
+        <figcaption>The top 5 individual efforts since 2000 </figcaption>
+      </figure>
       <li>The influx of international talent is undeniable and the game is the better for it. 389 players from 22 different countries played during the 2000 NBA season; 91.5% of these players were American. Flash forward to 2020, where 607 total players (roster sizes expanded) from 46 different countries played a game, and 77.1% of these players were American. For the past 3 seasons, the league MVP has also been European, with Denver's Nikola Jokic the reigning MVP with Giannis Antetokounmpo having won back to back MVP awards starting in 2019. He also unanimously won the 2021 Finals MVP. </li>
       <li>To be the top player in the NBA - to be the man - you need to average a minimum of x, y, z</li>
       <li>The most unique statline (n=220,000) of the past 20 years was recorded by Draymond Green of the Golden State Warriors. On February 10, 2017 in a game against Memphis, he pulled down 11 rebounds while dishing out 10 assists with 10 steals and 5 blocks... and 4 points. This was the first "triple-double" (when a player records double digit values in 3 statistical categories for a single game) in NBA history without scoring double-digits in points. He shot the ball 6 times, but ended up with a +/- score of 26. For reference, out of a total of 230,000 individual games played over the past 20 years, there has been a total of 1,090 triple-doubles (a 0.5% occurence). Based on this empirical data, the odds of tallying a triple double without points is 0.0005%. It was a once in a generation game. </li>
@@ -73,10 +77,6 @@
         <figcaption>A SQL search for 27 points, 7 rebounds and 7 assists results in no records</figcaption>
       </figure>
     </ol>
-    <h3>Identify test parameters, a question, and have a hypothesis</h3>
-    <h4>Hypothesis:</h4>
-    <h4>Methodology:</h4>
-    <p>I need to rank and quantile/qcut each data point; figure out how to score each factor with reasoning then find the average factor exposure per season.</p>
     <h4>Initial look at top 25 players, sorted by Game-score metric: </h4>
     <p>Methodology:</p>
     <br>
@@ -104,7 +104,7 @@
       <img src="/img/NBA_top__seasons_year_sort.png" srcset=""alt="best-each-season">
       <figcaption>Regime changes across the NBA - who was the best player for each season?</figcaption>
     </figure>
-    <h2>But first - how did I get all the data?</h2>
+    <h2>How did I get all the data?</h2>
     <br>
     <h4>First, I used an API, web scraping, and Pandas to get all game-logs from each player for each team since the 2000 season</h4>
     <p>Much of my data collection relied on data from the  <span><a href="https://www.basketball-reference.com/" target="_blank"> excellent Basketball Reference website,</a></span>  which has compiled statistics for seemingly every NBA game and NBA player that has ever played (and even data on the defunct ABA league). Using a combo of web scraping and calling APIs, for each of the 30 franchises in the NBA, I created a Jupyter workbook that pulled in the game log (an individual player's stats during a game) of each player for each of the 82 games played since 2000. With 12 players per team, 82 games played per year, 30 teams and 20 seasons, this implies a total dataset of ~590,400 records (12*82*30*20), although there is likely statistical noise involved.</p>
@@ -130,7 +130,7 @@
     <br>
     <h4>I also used web scraping and Pandas to pull in season stats for each player on each team since the 2000 season</h4>
     <p>To rank players by year - need to get each individual game, and quantile all values that matter. Then find a moving average within each season, and then take an average-weight to quantile (histogram) for each season. Then do this for the entire time period, years 2000-2021. </p>
-    <h3>Where to store the data for easy access? Enter SQL </h3>
+    <h3>Where to store the data for easy access? Enter MySQL </h3>
     <p>Now that I have all the data for every game played by every NBA player since the 2000 season, I need a place to store the data. For this I rely upon SQL -- which I use with python for easier data manipulation..</p>
     <figure>
       <img src="/img/python_SQL.png" srcset=""alt="python-SQL">
@@ -141,7 +141,6 @@
       <figcaption>Box score data for every NBA player's every game played, since 2000 -- which allows for creative search queries</figcaption>
     </figure>
     <h2>How Many Triples Doubles have been recorded since 2000?</h2>
-    <h3>Analysis using Python:</h3>
     <p>A 'triple double' in basketball is a statistical occurrence during which a player records >=10 in any three of the offensive statistical measures during a single game. As an example, the most common form of a triple-double is when an individual player tallies 10 or more points, 10 or more rebounds, and 10 or more assists for one game (the name refers to three stat categories in double digits). Some pundits regard it as a sign of basketball excellence, while others regard it as merely an outcome of stat-padding; the true meaning is likely somewhere in between. Triple-doubles historically have been rare, but have increased in prominence with the increased popularity of the three-point shot and increased pace of the game (higher ending game scores are indicative of more offensive possessions). </p>
     <p>Since 2000, there has been a total of 1,090 triple-doubles tallied by NBA players. This includes 1,076 triple-doubles of the point-rebounds-assists variety, with 13 composed of point-rebounds-blocks, and 1 including rebounds, assists and steals. </p>
     <figure>
