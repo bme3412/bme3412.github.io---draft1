@@ -62,15 +62,16 @@
     </figure>
     <h4>See below for scorching hot takes: </h4>
     <ol>
-      <li>The best player over the time period spanning from 2000-2021, purely looking at statistics and excluding the postseason, was LeBron James, followed next by Kevin Durant and then James Harden.</li>
+      
       <li>The best individual game during the past 20 years came from Kobe Bryant (Rest in Peace) in the 2006 season, when he scored 81 points, the 2nd highest in league history, to beat the Toronto Raptors. The next best game was a 60 point triple-double by James Harden, followed by a 70 point game by Devin Booker (the 3rd most points in a single game of all time). </li>
       <figure>
         <img src="/img/top_5.png" srcset=""alt="top-5-games">
         <figcaption>The top 5 individual efforts since 2000 </figcaption>
       </figure>
+      <li>The best player over the time period spanning from 2000-2021, purely looking at statistics and excluding the postseason, was LeBron James, followed next by Kevin Durant and then James Harden.</li>
       <li>The influx of international talent is undeniable and the game is the better for it. 389 players from 22 different countries played during the 2000 NBA season; 91.5% of these players were American. Flash forward to 2020, where 607 total players (roster sizes expanded) from 46 different countries played a game, and 77.1% of these players were American. For the past 3 seasons, the league MVP has also been European, with Denver's Nikola Jokic the reigning MVP with Giannis Antetokounmpo having won back to back MVP awards starting in 2019. He also unanimously won the 2021 Finals MVP. </li>
-      <li>To be the top player in the NBA - to be the man - you need to average a minimum of x, y, z. This is an xx % probability on a per-game basis. </li>
-      <li>The most unique statline (n=220,000) of the past 20 years was recorded by Draymond Green of the Golden State Warriors. On February 10, 2017 in a game against Memphis, he pulled down 11 rebounds while dishing out 10 assists with 10 steals and 5 blocks... and 4 points. This was the first "triple-double" (when a player records double digit values in 3 statistical categories for a single game) in NBA history without scoring double-digits in points. He shot the ball 6 times, but ended up with a +/- score of 26. For reference, out of a total of 230,000 individual games played over the past 20 years, there has been a total of 1,090 triple-doubles (a 0.5% occurence). Based on this empirical data, the odds of tallying a triple double without points is 0.0005%. It was a once in a generation game. </li>
+      <li>To be the top player in the NBA for a given season, a player would have to average a minimum of 24 points, 6 rebounds and 4 assists. Out of the total 230,326 statlines over the prior 20 years, this has occured 4,239 times, or 1.8% of all games played. Out of all of the best players since 2000, Kevin Garnett averaged the lowest points per game, at 24.2, but he also averaged 14 rebounds with 5 assists and 2 blocks, which has occured 261 times, or 0.1% of all games played. Kevin Garnett was MVP in 2004. </li>
+      <li>The most unique statline (n=230,320) of the past 20 years was recorded by Draymond Green of the Golden State Warriors. On February 10, 2017 in a game against Memphis, he pulled down 11 rebounds while dishing out 10 assists with 10 steals and 5 blocks... and 4 points. This was the first "triple-double" (when a player records double digit values in 3 statistical categories for a single game) in NBA history without scoring double-digits in points. He shot the ball 6 times, but ended up with a +/- score of 26. For reference, out of a total of 230,326 individual games played over the past 20 years, there has been a total of 1,090 triple-doubles (a 0.5% occurence). Based on this empirical data, the odds of tallying a triple double without points is 0.0005%. It was a once in a generation game. </li>
       <li>Throughout his 19 year (and counting) career, LeBron James has averaged 27 points, 7 rebounds and 7 assists for each game. Yet across the 1,305 regular season games he has played, he has never had an individual game with 27 points, 7 rebounds and 7 assists. Amazing. This is corroborated by a SQL query which returns null values. </li>
       
       <figure>
@@ -83,28 +84,29 @@
     <hr class="dashed">
     <br>
     <h2>Random Thought 1: Top 25 players of the past 20 years: </h2>
-    <p>Methodology:</p>
+    <p>Methodology: From the original dataset (n=230,326), I used the groupby function to group by player, then averaged each statistical category to arrive at career average stats, and finally ranked by highest Game_Score average. </p>
     <br>
     <figure>
       <img src="/img/NBA_top_25.png" srcset=""alt="nba-top25">
       <figcaption>Top 25 NBA players since the 2000 season: player per game metrics are quantiled, then sorted by GAME_SCORE</figcaption>
     </figure>
-    <p>Observations: </p>
+    <p>Observations: Even the most glib fans would not be surprised at the top 2 players, both perennial all-stars and both headed to the Hall of Fame: Lebron James, and Kevin Durant. LeBron James played 1,305 games from 2000-2021, during which he averaged 27 points per game with 7 assists, 7 rebounds, 2 steals and 1 block per game. Kevin Durant, whom played 800 games, took less shots per game overall, but did shoot more efficiently (Durant was top 20-30% for 3P, FT and FG, while James was slightly lower) while averaging 27 points, 7 rebounds and 4 assists. Next on the list was James Harden, who took more shots (he averaged 8.9 3P shots per game, as compared to 5.1 for Durant and 4.4 for James). At 29.1 points per game over 661 games, he ranked as the highest per-game scorer (games > 300) during the trailing 20 years. </p>
     <h4>Initial look at top 25 players, with metrics quantiled (1 = top 20%; 5 = bottom 20%): </h4>
-    <p>Methodology:</p>
+    <p>Methodology: To standardize across the dataset, I also ranked each value and then grouped into quantiles (where 1 = top 20% of the dataset and 5 = bottom 20% of the dataset). For the purpose of finding the best players, I filtered games played to > 300.</p>
     <figure>
       <img src="/img/NBA_top_25_ile.png" srcset=""alt="nba-top25-ile">
       <figcaption>Avg per game metrics are quantiled, then sorted by GAME_SCORE</figcaption>
     </figure>
     <p>Observations: </p>
     <h2>Random Thought 2: Top 25 individual seasons since 2000: </h2>
-    <p>Methodology:</p>
+    <p>Methodology: From the original dataset (n=230,326), I used the groupby function on Season, then averaged each statistical category to arrive at per season stats, and finally ranked by highest Game_Score average.</p>
     <figure>
       <img src="/img/NBA_top_25_seasons_by_year.png" srcset=""alt="nba-top25-seasons-year">
       <figcaption>It's LeBron James' world and the rest of the NBA is living in it</figcaption>
     </figure>
     <p>Observations: </p>
     <h2>Random Thought 3: The best player for each season, from 2000-2021 </h2>
+    <p>Observations: To be considered the best player per season, a player would have to average a minimum of 24 points per game, and pull down 6 rebounds while dishing out a minimum of 4 assists. Out of 230,326 player games played, this statline was achieved 4,239 times, or 1.8%. I should also point out the the best player per season averaged well north of 24 points per game, and that while Kevin Garnett did average the lowest points per game of the beast seasons of the past 20 years, he also averaged 14 rebounds, 5 assists and 2 blocks (in the 2004 season). Out of all games played since 2000, 261 players had games with > 24 points, > 14 rebounds and > 5 assists (0.1% of all games played). </p>
     <figure>
       <img src="/img/NBA_top__seasons_year_sort.png" srcset=""alt="best-each-season">
       <figcaption>Regime changes across the NBA - who was the best player for each season?</figcaption>
